@@ -5,11 +5,24 @@
 <div class="container well well-sm">
   <form action="" method="post" name="login">
   	{{ form.hidden_tag() }}
-      <p>Please enter your Login ID:</p>
-      <p> User Id {{ form.userid }}</p>
-      <p> Password {{ form.password  }}</p>
-      <p> Remember Me {{ form.remember_me }}</p>
-      <p><input type="submit" value="Sign In"></p>
+      <p><b>Please enter your Login ID:</b></p>
+      <div class="row">
+      	<div class="col-sm-2 col-md-2">User Id:</div> 
+      	<div class="col-sm-2 col-md-2">{{ form.userid (class="form-control") }}</div>
+      	<div class="col-sm-8 col-md-8"></div>
+      </div>
+      <br/>
+      <div class="row">
+      	<div class="col-sm-2 col-md-2"> Password:</div> 
+      	<div class="col-sm-2 col-md-2"> {{ form.password (class="form-control") }}</div>
+      	<div class="col-sm-8 col-md-8"></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-12"> Remember Me {{ form.remember_me }}</div>
+      </div>
+      <div class="row">
+      	<div class="col-sm-12 col-md-12"><input type="submit" value="Sign In" class="btn btn-default"></div>
+      </div>
   </form>
 </div>  
 {% endblock %}
