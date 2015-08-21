@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {# Following for loop prints posts. #}
+    <div class="row">
+    {% for post in posts %}
+    <div id="posts">
+            <!--<p style="font-size:22px; font-weight:bold">{{ post.ref_user_post.userid }} says: {{ post.posttext }}&nbsp;</p>-->
+            <p style="font-size:22px; font-weight:bold">
+                {{ post.posttext }}
+            </p>
+            <p><img src="{{ post.ref_user_post.avatar(50) }}"></p>
+                    
+    </div>
+    {# Following for loop prints answer for the post. #}
+
+    	{# Following for loop prints answer for the post. #}
+    	{% for answer in answers %}
+    	<div id="post_answers" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:15px; height:25">
+    		{% if post.id == answer.ref_post_answer.id %}
+    		<p>{{ answer.answertext }}&nbsp;
+    			<a href="{{ url_for('session_creater', post_type=2, pid=answer.id) }}">Comment</a>    			
+    		</p>
+    		{% endif %}
+    	</div>
+    	<p><a href="{{ url_for('session_creater', post_type=0,pid=post.id) }}">Answer</a>
+      	   <a href="{{ url_for('session_creater', post_type=1,pid=post.id) }}">Comment</a></p>
+    	{# Following for loop prints comment for the answer. #}
+    	{% for ans_comment in answer_comments %}
+    	<div id="ans_comment">
+    		{% if answer.id == ans_comment.ref_ans_anscomment.id %}
+    		<p><b>Answer Comment:</b>{{ ans_comment.answercommenttext }}</p>
+    		{% endif %}
+    	</div>
+    	{% endfor %}
+
+    	{% endfor %}
+
+    	{# Following for loop prints comment for the post. #}
+    	{% for post_comment in post_comments %}
+    	<div id="post_comments">
+    		{% if post.id == post_comment.ref_post_comment.id %}
+    		<p><b>Comment:</b>{{ post_comment.postcommenttext }}</p>
+    		{% endif %}
+    	</div>
+    	{% endfor %}
+    </div>
+    {% endfor %}
+{% endblock %}

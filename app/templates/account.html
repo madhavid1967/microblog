@@ -1,0 +1,15 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Create an Account</h1>
+  <form action="" method="post" name="account">	
+  		{{ form.hidden_tag() }}
+      <p>Please enter your OpenID, or select one of the providers below:</p>
+      <p> User Id {{ form.userid }}</p>
+      <p> Password {{ form.password  }}</p>
+      <p> Email Id {{ form.emailid }}</p>
+      <p> Remember Me {{ form.remember_me }}</p>
+      <p><input type="submit" value="Create Account"></p>
+  </form>
+{% endblock %}

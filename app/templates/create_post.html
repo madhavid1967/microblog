@@ -1,0 +1,15 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container well well-lg">
+  Enter your post:
+  <form action="" method="post" name="yourpost">	
+  		{{ form.hidden_tag() }}	
+      	<p>Please enter your new post below:</p>
+      {{ form.posttext(class="form-control", rows="5") }}
+      <br/>
+      <p><input type="submit" value="Save" class="btn btn-default"></p>
+  </form>
+</div>
+{% endblock %}

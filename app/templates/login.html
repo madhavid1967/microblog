@@ -1,0 +1,15 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container well well-sm">
+  <form action="" method="post" name="login">
+  	{{ form.hidden_tag() }}
+      <p>Please enter your Login ID:</p>
+      <p> User Id {{ form.userid }}</p>
+      <p> Password {{ form.password  }}</p>
+      <p> Remember Me {{ form.remember_me }}</p>
+      <p><input type="submit" value="Sign In"></p>
+  </form>
+</div>  
+{% endblock %}

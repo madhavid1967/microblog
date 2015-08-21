@@ -1,0 +1,26 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    {# Following for loop prints posts. #}
+        {% for post in posts %}
+        <div id="posts">
+    		<p style="font-size:22px; font-weight:bold">{{ post.posttext }}</p>
+    		<p><img src="{{ post.ref_user_post.avatar(50) }}"></p>      		    	
+        </div>
+        {# Following for loop prints answer for the post. #}
+        <p><b>Answers:</b></p>
+    	{# {% for answer in answers %} #}    	
+    		{# {% if post.id == answer.ref_post_answer.id %} #}
+            {% if single_answers.post_id == post.id %}
+            <div id="post_answers" class="well well-lg" style="font-family: 'Helvetica Neue', Helvetica,Arial, sans-serif; font-size:15px">
+    		  <p>{{ answer.answertext }}
+    			<a href="{{ url_for('session_creater', post_type=2, pid=answer.id) }}">Comment</a>    			
+    		  </p>
+            </div>
+    		{% endif %}    	
+    	{# {% endfor %} #}
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename='main_template.css') }}">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    {% if title %}
+    <meta charset="utf-8">
+    <title>{{ title }} - microblog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% else %}
+    <title>microblog</title>
+    {% endif %}
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <br/>
+          <a href="/index">Home</a>&nbsp;
+          {% if g.user.is_authenticated() %}      
+            &nbsp;<a href="/create_post">Post It</a>&nbsp;
+            &nbsp;<a href="{{ url_for('user', userid=g.user.userid) }}">Your Profile</a>&nbsp;
+            &nbsp;<a href="{{ url_for('logout') }}">Logout</a>
+          {% else %}           
+            &nbsp;<a href="/account">Create an account</a>&nbsp;           
+            &nbsp;<a href="/login">Login</a>&nbsp;
+            {# new added for facebook and twitter login
+           <a href="{{ url_for('oauth_authorize', provider='facebook') }}">Login with Facebook</a> #}
+          {% endif %}
+      </div>    
+          <hr>
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }} </li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>

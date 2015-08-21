@@ -1,0 +1,27 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container well well-sm">  
+  <span style="font-size:14px; font-weight:bold">Edit Your Profile</span>
+  <form action="" method="post" name="edit">
+      {{form.hidden_tag()}}
+      <div id="posts" class="row">
+          <div class="col-md-2 col-sm-2"> Your nickname:</div>
+          <div class="col-md-10 col-sm-10">{{ form.nickname(size=24, class="form-control") }}</div>
+      </div>
+      <div class="row">
+              {% for error in form.errors.nickname %}
+                <br><span style="color: red;">[{{ error }}]</span>
+              {% endfor %}
+      </div>
+       <div class="row">   
+          <div class="col-md-2 col-sm-2">About yourself:</div>
+          <div class="col-md-10 col-sm-10">{{ form.about_me(cols=32, rows=4, class="form-control") }}</div>
+       </div> 
+       <div class="row">      
+         <input type="submit" value="Save Changes" class="btn btn-default">
+      </div>
+  </form>
+  </div>
+{% endblock %}
