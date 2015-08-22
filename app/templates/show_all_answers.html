@@ -1,0 +1,17 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+	<div class="col-sm-8 col-md-8" style="font-size:22px; font-weight:bold">{{ posttext.posttext }}</div>
+	{% for a in answers %}
+	<div id="answers" class="row">
+		<div class="col-sm-10 col-md-10">{{ a['Answer Text'] }}</div>
+		<div class="col-sm-1 col-md-1">Date:{{ a['Date']}}</div>
+		<div class="col-sm-2 col-md-2"><img src="{{ a['User Avatar'] }}">&nbsp;{{ a['User Name'] }}</div>
+	</div>
+	<div id="answer_info" class="row">
+		<div class="col-sm-12 col-md-12">'Comment Count' : {{ a.comment_cnt }}</div>
+   	</div>
+{% endfor %}
+</div>
+{% endblock %}

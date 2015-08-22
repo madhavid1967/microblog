@@ -152,11 +152,42 @@ def session_creater(post_type, pid):
         #comment_on_post
         session['post_id']=pid
         return redirect(url_for('comment_on_post'))
-    else:
+    #else:
+        #comment_on_answer
+        #session['answer_id']=pid
+        #flash('answer_id %s' % (session['answer_id']))
+        #return redirect(url_for('comment_on_answer'))
+    elif(int(post_type) == 2):
         #comment_on_answer
         session['answer_id']=pid
         #flash('answer_id %s' % (session['answer_id']))
         return redirect(url_for('comment_on_answer'))
+    else:
+        session['post_id'] = pid
+        return redirect(url_for('show_all_answers'))
+
+@app.route('/show_all_answers')
+@login_required
+def show_all_answers():
+    user_name = current_user
+    post_id = session['post_id']
+    posttext = models.Post.query.filter_by(id=int(post_id)).first()
+    all_answers = models.Answers.query.filter_by(id=int(post_id)).all()
+    show_all_answers = []
+    for a in all_answers:
+        comment_cnt = models.Answer_Comments.query.filter_by(id=a.id).count()
+        answertext = a.answertext
+        date = a.timestamp
+        user_name = a.ref_user_answer.nickname
+        user_avatar = a.ref_user_answer.avatar(25)
+        answer = {'Comment Count' : comment_cnt,
+                'Answer Text':answertext,
+                'User Name':user_name,
+                'Date':date,
+                'User Avatar': user_avatar}
+
+        show_all_answers.append(answer)
+    return render_template('show_all_answers.html',title='All Answers on post.',answers=show_all_answers,postid=post_id,posttext=posttext)
 
 @app.route('/answer_post/', methods=['GET', 'POST'])
 @login_required

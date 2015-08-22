@@ -4,7 +4,10 @@
 <div class="container">
 {% for p in posts %}
     <div id="posts" class="row">
-        <div class="col-sm-8 col-md-8" style="font-size:22px; font-weight:bold">{{ p['post_id']}}&nbsp;{{ p['Post Text'] }}</div>
+    <!--<div class="col-sm-8 col-md-8" style="font-size:22px; font-weight:bold">{{ p['post_id']}}&nbsp;{{ p['Post Text'] }}</div>-->
+        <div class="col-sm-8 col-md-8" style="font-size:22px; font-weight:bold">
+            <a href="{{ url_for('session_creater', post_type=3, pid=p['Post Id']) }}">{{ p['Post Text'] }}</a>
+        </div>
         <div class="col-sm-1 col-md-1"><a href="{{ url_for('session_creater', post_type=0,pid=p['Post Id']) }}">Answer</a></div>
         <div class="col-sm-1 col-md-1"><a href="{{ url_for('session_creater', post_type=1,pid=p['Post Id']) }}">Comment</a></div>
         <div class="col-sm-2 col-md-2"><img src="{{ p['User Avatar'] }}">&nbsp;{{ p['User Name'] }}</div>                    
